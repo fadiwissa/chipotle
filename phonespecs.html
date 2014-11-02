@@ -1,0 +1,68 @@
+<div name="phoneSpecs" ng-show="phone.selectedPhone > 0 && phone.offerPrice == 0" class="text-center" style="margin-top:10px">
+    <div>
+        <h4 style="padding-bottom: 0px; margin-bottom: 0px">Please specify your phone details below</h4>
+    </div>
+    <form name="phoneSpecsForms">
+        <div class="text-center">
+            <h4><b>{{phone.getSelectedName()}}</b></h4>
+            <div class="img-thumbnail" style="margin-bottom:5px; border: none">
+                <img ng-src="{{phone.getSelectedImage()}}" />
+            </div>
+        </div>
+        <div class="text-center">
+            <b> 1. Storage</b> 
+            <br/>
+            <div style="padding-bottom:10px">
+                <label class="btn btn-default" ng-repeat="storage in phone.getSelectedStorage()">
+                    <input type="radio" name="phoneStorage" value="{{storage}}" ng-model="phone.phoneStorage" required>&nbsp;{{storage}}GB</label>
+            </div> <b> 2. Network</b> 
+            <br/>
+            <div style="padding-bottom:10px">
+                <label class="btn btn-default" ng-repeat="network in phone.getNetworks()">
+                    <input type="radio" name="phoneNetwork" value="{{network}}" ng-model="phone.phoneNetwork" required>&nbsp;{{network}}
+            </div>
+            </label>
+        </div>
+        <div class="text-center" style="padding-bottom:10px"> <b> 3. Condition</b> 
+            <br/>
+            <div style="padding-bottom:10px">
+                <label class="btn btn-default" ng-repeat="aCondition in phone.getConditions()">
+                    <input type="radio" name="phoneCondition" value="{{aCondition}}" ng-model="phone.phoneCondition" required>&nbsp;{{aCondition}}</label>
+            </div>
+            <small>
+                <div class="text-left col-xs-12 col-md-4 col-md-offset-4 col-sm-12">
+
+                    <div name="flawless" ng-show="phone.phoneCondition=='Flawless'">
+                        Your iPhone is in this condition if <b>ALL</b> of the following are true:
+                        <br/>
+                        <li>Works perfectly</li>
+                        <li>No noticeable flaws, still in its package or looks like new</li>
+                        <li>Has zero scratches</li>
+                        <li>Has no dust under the glass</li>
+                    </div>
+
+                    <div name="good" ng-show="phone.phoneCondition=='Good'">
+
+                        Your iPhone is in great working order with some minor cosmetic signs of wear. Your iPhone has no cracks or missing buttons (power, home, ringer, and/or volume).
+
+                    </div>
+                    <div name="broken" ng-show="phone.phoneCondition=='Broken/Cracked'">
+                        Your iPhone is in this condition if <b>ANY</b> of the following is true:
+                        <br/>
+                        <li>Does not power on</li>
+                        <li>Broken or cracked LCD screen or glass</li>
+                        <li>Missing buttons (power, home, ringer, volume)</li>
+                        <li>Broken or cracked hardware (charging ports, casing, etc.)</li>
+                        <li>Housing separation beyond the width of a coin</li>
+                    </div>
+                </div>
+            </small>
+        </div>
+        <div class="text-right col-xs-6" style="margin-top: 10px">
+            <button type="button" class="btn btn-primary" ng-click="phone.restartSelection()" style="width: 120px">&lt; &nbsp;Back</button>
+        </div>
+        <div class="text-left col-xs-6" style="margin-top: 10px">
+            <button type="button" class="btn btn-primary" style="width: 120px" ng-disabled="phoneSpecsForms.$invalid" ng-click="phone.getPhoneOffer()">Get Offer &nbsp; &gt;</button>
+        </div>
+    </form>
+</div>

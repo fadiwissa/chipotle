@@ -1,0 +1,33 @@
+<div name="phoneOffer" ng-show="phone.offerPrice > 0" class="text-center">
+    <h2>We want to buy your phone for</h2>
+    <h1 class="jumbotron text-center">{{phone.offerPrice | number}} EGP</h1>
+
+    <span class="text-center" style="color:red" ng-show="!user">
+        Please login to be allowed to accept our offer
+        <br/>
+        <br/>
+    </span>
+    <div ng-show="!offerAccepted">
+        <div class="text-right col-xs-6" style="margin-top: 10px">
+
+            <button type="button" ng-click="phone.backToSpecs()" class="btn btn-primary"><b>&lt;&nbsp;Back</b>
+            </button>
+        </div>
+
+        <div class="text-left col-xs-6" style="margin-top: 10px">
+            <button type="button" ng-click="phone.acceptOffer(phone.phoneStorage, phone.phoneNetwork, phone.phoneCondition)" class="btn btn-success" ng-disabled="!user"><b>Accept Offer</b>
+            </button>
+        </div>
+
+        <br/>
+        <small><i>Click above to provide your details so we may pick up your phone</i></small>
+    </div>
+    <div ng-show="offerAccepted">
+        <div class="alert alert-info" role="alert">
+            <b>Thank you for accepting our offer!
+        <br/>We will be contacting you shortly for pick up details...</b>
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="phone.restartSelection()" style="width: 120px">Done</button>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="phoneStore">
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <link rel="stylesheet" href="css/ibekya.css">
+
+    <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+    <script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+
+    <title>iBekya - we buy</title>
+</head>
+
+<body ng-controller="phoneController as phone" class="wrapper">
+    <!-- START HEADER -->
+    <div id="wrap">
+        <div class="container">
+            <div class="row">
+                <ibekya-header></ibekya-header>
+            </div>
+            <div class="row well well-sm text-center " style="padding:0px; margin-bottom:10px ">
+                <h3 style="margin:10px"> Ready to sell your used iPhone? </h3> 
+            </div>
+            <div class="row panel-body panel-transparent panel-default" style="margin-top:0px; padding-top:0px ">
+                <div class="panel-body panel-transparent text-center " style="padding-top:0px ">
+                    <phone-list></phone-list>
+                    <phone-specs></phone-specs>
+                    <phone-offer></phone-offer>
+                </div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+    <div id="footer">
+        <div class="container text-center" style="padding-top:20px">All Rights Reserved. iBekya 2015</div>
+    </div>
+    <!-- END PHONES LIST -->
+</body>
+
+</html>

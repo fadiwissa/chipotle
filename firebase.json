@@ -1,0 +1,9 @@
+{
+  "firebase": "shining-heat-2975",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

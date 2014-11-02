@@ -1,0 +1,25 @@
+<h3>iBekya Accepted Offers</h3>
+
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <tr>
+            <th data-field="name">Name</th>
+            <th data-field="model">Model</th>
+            <th data-field="storage">Storage</th>
+            <th data-field="network">Network</th>
+            <th data-field="condition">Condition</th>
+            <th data-field="offer">Offer</th>
+            <th data-field="date">Date</th>
+        </tr>
+
+        <tr ng-repeat="acceptedOffer in acceptedOffers">
+            <td>{{acceptedOffer.user}}</td>
+            <td>{{acceptedOffer.model}}</td>
+            <td>{{acceptedOffer.storage}}GB</td>
+            <td>{{acceptedOffer.network}}</td>
+            <td>{{acceptedOffer.condition}}</td>
+            <td>{{acceptedOffer.offer | number}}</td>
+            <td>{{acceptedOffer.submissionDate | date : 'medium' : '+0200'}}&nbsp;(GMT+2)</td>
+        </tr>
+    </table>
+</div>
