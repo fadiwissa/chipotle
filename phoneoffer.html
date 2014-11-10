@@ -1,7 +1,6 @@
-<div name="phoneOffer" ng-show="phone.offerPrice > 0" class="text-center">
+<div name="phoneOffer" ng-show="phone.readyForOffer" class="text-center">
     <h2>We want to buy your phone for</h2>
-    <h1 class="jumbotron text-center">{{phone.offerPrice | number}} EGP</h1>
-
+    <h1 class="jumbotron text-center">{{offeredPrice.$value | number}} EGP</h1>
     <span class="text-center" style="color:red" ng-show="!user">
         Please login to be allowed to accept our offer
         <br/>

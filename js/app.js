@@ -30,7 +30,7 @@
         pricesRef.child('iPhone 5C').set(iPhone5CPricesArray);
         pricesRef.child('iPhone 6').set(iPhone6PricesArray);
         pricesRef.child('iPhone 6 Plus').set(iPhone6PlusPricesArray);
-        
+
         this.phones = makesArray;
 
         this.conditionDescription = '';
@@ -44,6 +44,8 @@
 
         this.offerPrice = 0;
 
+        this.readyForOffer = false;
+
         this.selectPhone = function (selection, selectedModel) {
             //Dummy function for now
             this.selectedPhone = selection;
@@ -51,11 +53,13 @@
         };
 
         this.getPhoneOffer = function () {
-            this.offerPrice = 2500;
+            this.readyForOffer = true;
+            this.getOfferPrice();
         };
 
         this.backToSpecs = function () {
             this.offerPrice = 0;
+            this.readyForOffer = false;
             $scope.offerAccepted = false;
         }
 
@@ -67,10 +71,35 @@
             this.phoneCondition = null;
             this.offerPrice = 0;
             $scope.offerAccepted = false;
+            this.readyForOffer = false;
         };
 
         this.isSelected = function (checkPhone) {
             return checkPhone == this.phone;
+        };
+
+        this.getOfferPrice = function () {
+            if (!this.readyForOffer) return;
+
+            var url = this.getSelectedName();
+            url += "/" + this.phoneStorage;
+
+            if (this.phoneNetwork == "Factory Unlocked")
+                url += "/" + "Unlocked";
+            else
+                url += "/" + "Locked";
+
+            if (this.phoneCondition == "Broken/\Cracked")
+                url += "/" + "Broken";
+            else
+                url += "/" + this.phoneCondition;
+
+            var url = "https://shining-heat-2975.firebaseio.com/phonePrices/" + url;
+
+            var offerRef = new Firebase(url);
+            var sync = $firebase(offerRef);
+
+            $scope.offeredPrice = sync.$asObject();
         };
 
         this.getSelectedName = function () {
@@ -207,82 +236,253 @@
             storage: [16, 64, 128]
         }
     ];
-    
-    var iPhone4PricesArray = 
-                       {'16':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '32':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}}
-                       };
-    
-    var iPhone4SPricesArray = 
-                       {'16':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '32':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '64':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}}, 
-                       };
-    
-    var iPhone5PricesArray = 
-                       {'16':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '32':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '64':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}}, 
-                       };
-    
-    var iPhone5CPricesArray = 
-                       {'16':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '32':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}}
-                       };
-    
-    var iPhone5SPricesArray = 
-                       {'16':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '32':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '64':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}}, 
-                       };
-    
-    var iPhone6PricesArray = 
-                       {'16':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '64':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '128':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}}, 
-                       };
-    
-     var iPhone6PlusPricesArray = 
-                       {'16':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '64':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}},
-                       '128':
-                        {'Locked': {'Flawless':500, 'Good': 400, 'Broken': 200},
-                         'Unlocked': {'Flawless':500, 'Good': 400, 'Broken': 200}}, 
-                       };
+
+    var iPhone4PricesArray = {
+        '16': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '32': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        }
+    };
+
+    var iPhone4SPricesArray = {
+        '16': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '32': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '64': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+    };
+
+    var iPhone5PricesArray = {
+        '16': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '32': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '64': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+    };
+
+    var iPhone5CPricesArray = {
+        '16': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '32': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        }
+    };
+
+    var iPhone5SPricesArray = {
+        '16': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '32': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '64': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+    };
+
+    var iPhone6PricesArray = {
+        '16': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '64': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '128': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+    };
+
+    var iPhone6PlusPricesArray = {
+        '16': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '64': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+        '128': {
+            'Locked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            },
+            'Unlocked': {
+                'Flawless': 500,
+                'Good': 400,
+                'Broken': 200
+            }
+        },
+    };
 })();
