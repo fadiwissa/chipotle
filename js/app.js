@@ -148,7 +148,7 @@
                 'storage': this.phoneStorage,
                 'network': this.phoneNetwork,
                 'condition': this.phoneCondition,
-                'offer': this.offerPrice,
+                'offer': $scope.offeredPrice.$value,
                 'user': $scope.user.displayName,
                 'userID': $scope.user.uid,
                 'submissionDate': Firebase.ServerValue.TIMESTAMP
