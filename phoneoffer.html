@@ -1,13 +1,28 @@
-<div name="phoneOffer" ng-show="phone.readyForOffer" class="text-center">
+<div ng-show="phone.readyForOffer && !user">
+    <br/>
+    <div class="alert alert-danger" role="alert">
+        Please login (using the button above) to see our offer
+    </div>
+    <br/>
+    <button type="button" ng-click="phone.backToSpecs()" class="btn btn-primary"><b>&lt;&nbsp;Back</b>
+    </button>
+</div>
+
+
+<div name="phoneOffer" ng-show="phone.readyForOffer && user" class="text-center">
     <h2>We want to buy your</h2>
     <span style="color:red">{{phone.phoneModel}} | {{phone.phoneStorage}}GB | {{phone.phoneNetwork}} | {{phone.phoneCondition}}</span>
     <h3>for</h3>
     <h1 class="jumbotron text-center">{{offeredPrice.$value | number}} L.E.</h1>
-    <span class="text-center" style="color:red" ng-show="!user">
-        Please login to be allowed to accept our offer
+
+    <div class="input-group">
+        <span class="input-group-addon">Mobile Number</span>
+        <input type="text" class="form-control" placeholder="Please enter your Mobile Number" ng-model="phone.userMobile">
+        <input type="text" class="form-control" placeholder="Please confirm your Mobile Number" ng-model="phone.userMobileConfirmation">
         <br/>
         <br/>
-    </span>
+    </div>
+
     <div ng-show="!offerAccepted">
         <div class="text-right col-xs-6" style="margin-top: 10px">
 
@@ -16,14 +31,13 @@
         </div>
 
         <div class="text-left col-xs-6" style="margin-top: 10px">
-            <button type="button" ng-click="phone.acceptOffer(phone.phoneStorage, phone.phoneNetwork, phone.phoneCondition)" class="btn btn-success" ng-disabled="!user"><b>Accept Offer</b>
+            <button type="button" ng-click="phone.validateInput() && phone.acceptOffer(phone.phoneStorage, phone.phoneNetwork, phone.phoneCondition)" class="btn btn-success" ng-disabled="!user"><b>Accept Offer</b>
             </button>
         </div>
-
         <br/>
-        <small><i>Click above to provide your details so we may pick up your phone</i></small>
     </div>
     <div ng-show="offerAccepted">
+        <br/>
         <div class="alert alert-info" role="alert">
             <b>Thank you for accepting our offer!
         <br/>We will be contacting you shortly for pick up details...</b>

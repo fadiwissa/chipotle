@@ -1,9 +1,9 @@
-(function () {
+(function() {
     var app = angular.module("phoneStore", ["firebase"]);
 
-    app.controller('phoneController', function ($scope, $firebase) {
+    app.controller('phoneController', function($scope, $firebase) {
         var myRef = new Firebase("https://shining-heat-2975.firebaseio.com");
-        var authClient = new FirebaseSimpleLogin(myRef, function (error, user) {
+        var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
             if (error) {
                 // an error occurred while attempting login
                 console.log(error);
@@ -46,24 +46,36 @@
 
         this.readyForOffer = false;
 
-        this.selectPhone = function (selection, selectedModel) {
+        this.selectPhone = function(selection, selectedModel) {
             //Dummy function for now
             this.selectedPhone = selection;
             this.phoneModel = selectedModel;
         };
 
-        this.getPhoneOffer = function () {
+        this.validateInput = function() {
+            var phoneno = /^\d{11}$/;
+            if (!this.userMobile.match(phoneno)) {
+                alert("Please enter a valid 11-digit mobile phone number (without any spaces or special characters)");
+                return false;
+            } else if (this.userMobile != this.userMobileConfirmation) {
+                alert("Entered mobile number and confirmation do not match");
+                return false;
+            } else
+                return true;
+        };
+
+        this.getPhoneOffer = function() {
             this.readyForOffer = true;
             this.getOfferPrice();
         };
 
-        this.backToSpecs = function () {
+        this.backToSpecs = function() {
             this.offerPrice = 0;
             this.readyForOffer = false;
             $scope.offerAccepted = false;
         }
 
-        this.restartSelection = function () {
+        this.restartSelection = function() {
             this.selectedPhone = 0;
             this.phoneModel = null;
             this.phoneNetwork = null;
@@ -74,11 +86,11 @@
             this.readyForOffer = false;
         };
 
-        this.isSelected = function (checkPhone) {
+        this.isSelected = function(checkPhone) {
             return checkPhone == this.phone;
         };
 
-        this.getOfferPrice = function () {
+        this.getOfferPrice = function() {
             if (!this.readyForOffer) return;
 
             var url = this.getSelectedName();
@@ -102,44 +114,44 @@
             $scope.offeredPrice = sync.$asObject();
         };
 
-        this.getSelectedName = function () {
+        this.getSelectedName = function() {
             if (this.selectedPhone == 0)
                 return '';
             else
                 return makesArray[this.selectedPhone - 1].name;
         };
 
-        this.getSelectedImage = function () {
+        this.getSelectedImage = function() {
             if (this.selectedPhone == 0)
                 return '';
             else
                 return makesArray[this.selectedPhone - 1].image;
         };
 
-        this.getSelectedStorage = function () {
+        this.getSelectedStorage = function() {
             if (this.selectedPhone == 0)
                 return '';
             else
                 return makesArray[this.selectedPhone - 1].storage;
         };
 
-        this.getNetworks = function () {
+        this.getNetworks = function() {
             return this.networks;
         };
 
-        this.getConditions = function () {
+        this.getConditions = function() {
             return this.conditions;
         };
 
-        this.signIn = function () {
+        this.signIn = function() {
             authClient.login("facebook");
         };
 
-        this.signOut = function () {
+        this.signOut = function() {
             authClient.logout();
         };
 
-        this.acceptOffer = function () {
+        this.acceptOffer = function() {
             var ref = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
             var sync = $firebase(ref);
 
@@ -151,6 +163,7 @@
                 'offer': $scope.offeredPrice.$value,
                 'user': $scope.user.displayName,
                 'userID': $scope.user.uid,
+                'userMobile': this.userMobile,
                 'submissionDate': Firebase.ServerValue.TIMESTAMP
             });
 
@@ -158,84 +171,76 @@
         };
     });
 
-    app.directive('phoneList', function () {
+    app.directive('phoneList', function() {
         return {
             restrict: 'E',
             templateUrl: 'phonelist.html'
         };
     });
 
-    app.directive('phoneSpecs', function () {
+    app.directive('phoneSpecs', function() {
         return {
             restrict: 'E',
             templateUrl: 'phonespecs.html'
         };
     });
 
-    app.directive('phoneOffer', function () {
+    app.directive('phoneOffer', function() {
         return {
             restrict: 'E',
             templateUrl: 'phoneoffer.html'
         };
     });
-    app.directive('ibekyaHeader', function () {
+    app.directive('ibekyaHeader', function() {
         return {
             restrict: 'E',
             templateUrl: 'ibekyaheader.html'
         };
     });
 
-    app.directive('ibekyaOffers', function () {
+    app.directive('ibekyaOffers', function() {
         return {
             restrict: 'E',
             templateUrl: 'ibekyaoffers.html'
         };
     });
 
-    var makesArray = [
-        {
-            name: 'iPhone 4',
-            image: 'img/iphone-4.jpg',
-            makeID: 1,
-            storage: [16, 32]
-        },
-        {
-            name: 'iPhone 4S',
-            image: 'img/iphone-4s.jpg',
-            makeID: 2,
-            storage: [16, 32, 64]
-        },
-        {
-            name: 'iPhone 5',
-            image: 'img/iphone-5.jpg',
-            makeID: 3,
-            storage: [16, 32, 64]
-        },
-        {
-            name: 'iPhone 5C',
-            image: 'img/iphone-5c.jpg',
-            makeID: 4,
-            storage: [16, 32]
-        },
-        {
-            name: 'iPhone 5S',
-            image: 'img/iphone-5s.jpg',
-            makeID: 5,
-            storage: [16, 32, 64]
-        },
-        {
-            name: 'iPhone 6',
-            image: 'img/iphone-6.jpg',
-            makeID: 6,
-            storage: [16, 64, 128]
-        },
-        {
-            name: 'iPhone 6 Plus',
-            image: 'img/iphone-6-plus.jpg ',
-            makeID: 7,
-            storage: [16, 64, 128]
-        }
-    ];
+    var makesArray = [{
+        name: 'iPhone 4',
+        image: 'img/iphone-4.jpg',
+        makeID: 1,
+        storage: [16, 32]
+    }, {
+        name: 'iPhone 4S',
+        image: 'img/iphone-4s.jpg',
+        makeID: 2,
+        storage: [16, 32, 64]
+    }, {
+        name: 'iPhone 5',
+        image: 'img/iphone-5.jpg',
+        makeID: 3,
+        storage: [16, 32, 64]
+    }, {
+        name: 'iPhone 5C',
+        image: 'img/iphone-5c.jpg',
+        makeID: 4,
+        storage: [16, 32]
+    }, {
+        name: 'iPhone 5S',
+        image: 'img/iphone-5s.jpg',
+        makeID: 5,
+        storage: [16, 32, 64]
+    }, {
+        name: 'iPhone 6',
+        image: 'img/iphone-6.jpg',
+        makeID: 6,
+        storage: [16, 64, 128]
+    }, {
+        name: 'iPhone 6 Plus',
+        image: 'img/iphone-6-plus.jpg ',
+        makeID: 7,
+        storage: [16, 64, 128]
+    }];
 
     var iPhone4PricesArray = {
         '16': {
