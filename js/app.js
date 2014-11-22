@@ -53,15 +53,29 @@
         };
 
         this.validateInput = function() {
-            var phoneno = /^\d{11}$/;
-            if (!this.userMobile.match(phoneno)) {
+            if (this.userMobile == undefined || this.userEmail == undefined) {
+                alert("Please enter your mobile number & e-mail address");
+                return false;
+            }
+            var validPhone = /^\d{11}$/;
+            var validEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+            if (!this.userMobile.match(validPhone)) {
                 alert("Please enter a valid 11-digit mobile phone number (without any spaces or special characters)");
                 return false;
-            } else if (this.userMobile != this.userMobileConfirmation) {
+            }
+            if (this.userMobile != this.userMobileConfirmation) {
                 alert("Entered mobile number and confirmation do not match");
                 return false;
-            } else
-                return true;
+            }
+            if (!this.userEmail.match(validEmail)) {
+                alert("Please enter a valid e-mail address");
+                return false;
+            }
+            if (this.userEmail != this.userEmailConfirmation) {
+                alert("Entered e-mail address and confirmation do not match");
+                return false;
+            }
+            return true;
         };
 
         this.getPhoneOffer = function() {
@@ -84,6 +98,10 @@
             this.offerPrice = 0;
             $scope.offerAccepted = false;
             this.readyForOffer = false;
+            this.userMobile = null;
+            this.userEmail = null;
+            this.userMobileConfirmation = null;
+            this.userEmailConfirmation = null;
         };
 
         this.isSelected = function(checkPhone) {
@@ -164,6 +182,7 @@
                 'user': $scope.user.displayName,
                 'userID': $scope.user.uid,
                 'userMobile': this.userMobile,
+                'userEmail': this.userEmail,
                 'submissionDate': Firebase.ServerValue.TIMESTAMP
             });
 

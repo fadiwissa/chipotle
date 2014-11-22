@@ -17,11 +17,16 @@
 
     <div class="input-group">
         <span class="input-group-addon">Mobile Number</span>
-        <input type="text" class="form-control" placeholder="Please enter your Mobile Number" ng-model="phone.userMobile">
-        <input type="text" class="form-control" placeholder="Please confirm your Mobile Number" ng-model="phone.userMobileConfirmation">
-        <br/>
-        <br/>
+        <input type="text" class="form-control" placeholder="Mobile Number" ng-model="phone.userMobile">
+        <input type="text" class="form-control" placeholder="Mobile Number Confirmation" ng-model="phone.userMobileConfirmation">
+
+        <span class="input-group-addon">E-mail Address</span>
+        <input type="text" class="form-control" placeholder="E-mail Address" ng-model="phone.userEmail">
+        <input type="text" class="form-control" placeholder="E-mail Address Confirmation" ng-model="phone.userEmailConfirmation">
     </div>
+
+    <br/>
+    <br/>
 
     <div ng-show="!offerAccepted">
         <div class="text-right col-xs-6" style="margin-top: 10px">
