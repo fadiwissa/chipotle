@@ -22,6 +22,7 @@
         var offersSync = $firebase(offersRef);
         $scope.acceptedOffers = offersSync.$asArray();
 
+        /*
         var pricesRef = new Firebase("https://shining-heat-2975.firebaseio.com/phonePrices");
         pricesRef.child('iPhone 4').set(iPhone4PricesArray);
         pricesRef.child('iPhone 4S').set(iPhone4SPricesArray);
@@ -30,6 +31,7 @@
         pricesRef.child('iPhone 5C').set(iPhone5CPricesArray);
         pricesRef.child('iPhone 6').set(iPhone6PricesArray);
         pricesRef.child('iPhone 6 Plus').set(iPhone6PlusPricesArray);
+        */
 
         this.phones = makesArray;
 
