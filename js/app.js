@@ -20,7 +20,6 @@
 
         var offersRef = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
         var offersSync = $firebaseArray(offersRef);
-        $scope.acceptedOffers = offersSync;
 
         /*
         var pricesRef = new Firebase("https://shining-heat-2975.firebaseio.com/phonePrices");
@@ -129,9 +128,7 @@
             var url = "https://shining-heat-2975.firebaseio.com/phonePrices/" + url;
 
             var offerRef = new Firebase(url);
-            var sync = $firebaseArray(offerRef);
-
-            $scope.offeredPrice = sync.$asObject();
+            $scope.offeredPrice = $firebaseArray(offerRef);
         };
 
         this.getSelectedName = function() {
