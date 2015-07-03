@@ -170,9 +170,7 @@
 
         this.acceptOffer = function() {
             var ref = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
-            var sync = $firebaseArray(ref);
-
-            sync.$push({
+            $firebaseArray(ref).push({
                 'model': this.phoneModel,
                 'storage': this.phoneStorage,
                 'network': this.phoneNetwork,
