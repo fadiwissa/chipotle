@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module("phoneStore", ["firebase"]);
 
-    app.controller('phoneController', function($scope, $firebaseArray) {
+    app.controller('phoneController', function($scope, $firebaseArray, $firebaseObject) {
         var myRef = new Firebase("https://shining-heat-2975.firebaseio.com");
         var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
             if (error) {
@@ -128,7 +128,7 @@
             var url = "https://shining-heat-2975.firebaseio.com/phonePrices/" + url;
 
             var offerRef = new Firebase(url);
-            $scope.offeredPrice = $firebaseArray(offerRef);
+            $scope.offeredPrice = $firebaseObject(offerRef);
         };
 
         this.getSelectedName = function() {
