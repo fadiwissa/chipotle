@@ -1,9 +1,9 @@
-(function() {
+(function () {
     var app = angular.module("phoneStore", ["firebase"]);
 
-    app.controller('phoneController', function($scope, $firebaseArray, $firebaseObject) {
+    app.controller('phoneController', function ($scope, $firebaseArray, $firebaseObject) {
         var myRef = new Firebase("https://shining-heat-2975.firebaseio.com");
-        var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
+        var authClient = new FirebaseSimpleLogin(myRef, function (error, user) {
             if (error) {
                 // an error occurred while attempting login
                 console.log(error);
@@ -17,6 +17,49 @@
                 $scope.$apply();
             }
         });
+
+        var notify = function () {
+            // Check for notification compatibility.
+            if (!'Notification' in window) {
+                // If the browser version is unsupported, remain silent.
+                return;
+            }
+            // Log current permission level
+            console.log(Notification.permission);
+            // If the user has not been asked to grant or deny notifications
+            // from this domain...
+            if (Notification.permission === 'default') {
+                Notification.requestPermission(function () {
+                    // ...callback this function once a permission level has been set.
+                    notify();
+                });
+            }
+            // If the user has granted permission for this domain to send notifications...
+            else if (Notification.permission === 'granted') {
+                var n = new Notification(
+                    'New message from iBekya', {
+                        'body': 'iBekya: "Hey, thanks for enabling Notifications"',
+                        // ...prevent duplicate notifications
+                        'tag': 'unique string'
+                    }
+                );
+                // Remove the notification from Notification Center when clicked.
+                n.onclick = function () {
+                    this.close();
+                };
+                // Callback function when the notification is closed.
+                n.onclose = function () {
+                    console.log('Notification closed');
+                };
+            }
+            // If the user does not want notifications to come from this domain...
+            else if (Notification.permission === 'denied') {
+                // ...remain silent.
+                return;
+            }
+        };
+
+        notify();
 
         var offersRef = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
         var offersSync = $firebaseArray(offersRef);
@@ -48,13 +91,13 @@
 
         this.readyForOffer = false;
 
-        this.selectPhone = function(selection, selectedModel) {
+        this.selectPhone = function (selection, selectedModel) {
             //Dummy function for now
             this.selectedPhone = selection;
             this.phoneModel = selectedModel;
         };
 
-        this.validateInput = function() {
+        this.validateInput = function () {
             if (this.userMobile == undefined || this.userEmail == undefined) {
                 alert("Please enter your mobile number & e-mail address");
                 return false;
@@ -80,18 +123,18 @@
             return true;
         };
 
-        this.getPhoneOffer = function() {
+        this.getPhoneOffer = function () {
             this.readyForOffer = true;
             this.getOfferPrice();
         };
 
-        this.backToSpecs = function() {
+        this.backToSpecs = function () {
             this.offerPrice = 0;
             this.readyForOffer = false;
             $scope.offerAccepted = false;
         }
 
-        this.restartSelection = function() {
+        this.restartSelection = function () {
             this.selectedPhone = 0;
             this.phoneModel = null;
             this.phoneNetwork = null;
@@ -106,11 +149,11 @@
             this.userEmailConfirmation = null;
         };
 
-        this.isSelected = function(checkPhone) {
+        this.isSelected = function (checkPhone) {
             return checkPhone == this.phone;
         };
 
-        this.getOfferPrice = function() {
+        this.getOfferPrice = function () {
             if (!this.readyForOffer) return;
 
             var url = this.getSelectedName();
@@ -132,44 +175,44 @@
             $scope.offeredPrice = $firebaseObject(offerRef);
         };
 
-        this.getSelectedName = function() {
+        this.getSelectedName = function () {
             if (this.selectedPhone == 0)
                 return '';
             else
                 return makesArray[this.selectedPhone - 1].name;
         };
 
-        this.getSelectedImage = function() {
+        this.getSelectedImage = function () {
             if (this.selectedPhone == 0)
                 return '';
             else
                 return makesArray[this.selectedPhone - 1].image;
         };
 
-        this.getSelectedStorage = function() {
+        this.getSelectedStorage = function () {
             if (this.selectedPhone == 0)
                 return '';
             else
                 return makesArray[this.selectedPhone - 1].storage;
         };
 
-        this.getNetworks = function() {
+        this.getNetworks = function () {
             return this.networks;
         };
 
-        this.getConditions = function() {
+        this.getConditions = function () {
             return this.conditions;
         };
 
-        this.signIn = function() {
+        this.signIn = function () {
             authClient.login("facebook");
         };
 
-        this.signOut = function() {
+        this.signOut = function () {
             authClient.logout();
         };
 
-        this.acceptOffer = function() {
+        this.acceptOffer = function () {
             var ref = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
             ref.push({
                 'model': this.phoneModel,
@@ -188,34 +231,34 @@
         };
     });
 
-    app.directive('phoneList', function() {
+    app.directive('phoneList', function () {
         return {
             restrict: 'E',
             templateUrl: 'phonelist.html'
         };
     });
 
-    app.directive('phoneSpecs', function() {
+    app.directive('phoneSpecs', function () {
         return {
             restrict: 'E',
             templateUrl: 'phonespecs.html'
         };
     });
 
-    app.directive('phoneOffer', function() {
+    app.directive('phoneOffer', function () {
         return {
             restrict: 'E',
             templateUrl: 'phoneoffer.html'
         };
     });
-    app.directive('ibekyaHeader', function() {
+    app.directive('ibekyaHeader', function () {
         return {
             restrict: 'E',
             templateUrl: 'ibekyaheader.html'
         };
     });
 
-    app.directive('ibekyaOffers', function() {
+    app.directive('ibekyaOffers', function () {
         return {
             restrict: 'E',
             templateUrl: 'ibekyaoffers.html'
