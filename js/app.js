@@ -18,7 +18,6 @@
             }
         });
 
-        /*
         var notify = function () {
             // Check for notification compatibility.
             if (!'Notification' in window) {
@@ -60,11 +59,12 @@
             }
         };
 
-        if (!'Notification' in window)
-            return;
-        else
-            notify();
-        */
+        try {
+            if (!'Notification' in window)
+                return;
+            else
+                notify();
+        } catch (err) {}
 
         var offersRef = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
         var offersSync = $firebaseArray(offersRef);
