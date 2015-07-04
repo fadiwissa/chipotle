@@ -272,37 +272,37 @@
 
     var makesArray = [{
         name: 'iPhone 4',
-        image: 'img/iphone-4.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-4.jpg',
         makeID: 1,
         storage: [16, 32]
     }, {
         name: 'iPhone 4S',
-        image: 'img/iphone-4s.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-4s.jpg',
         makeID: 2,
         storage: [16, 32, 64]
     }, {
         name: 'iPhone 5',
-        image: 'img/iphone-5.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5.jpg',
         makeID: 3,
         storage: [16, 32, 64]
     }, {
         name: 'iPhone 5C',
-        image: 'img/iphone-5c.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5c.jpg',
         makeID: 4,
         storage: [16, 32]
     }, {
         name: 'iPhone 5S',
-        image: 'img/iphone-5s.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5s.jpg',
         makeID: 5,
         storage: [16, 32, 64]
     }, {
         name: 'iPhone 6',
-        image: 'img/iphone-6.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-6.jpg',
         makeID: 6,
         storage: [16, 64, 128]
     }, {
         name: 'iPhone 6 Plus',
-        image: 'img/iphone-6-plus.jpg ',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-6-plus.jpg ',
         makeID: 7,
         storage: [16, 64, 128]
     }];
