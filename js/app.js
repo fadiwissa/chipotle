@@ -59,7 +59,10 @@
             }
         };
 
-        notify();
+        if (!'Notification' in window)
+            return;
+        else
+            notify();
 
         var offersRef = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
         var offersSync = $firebaseArray(offersRef);
