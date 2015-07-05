@@ -221,7 +221,7 @@
 
         this.acceptOffer = function () {
             var ref = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
-            var $scope.submissionID = Math.floor((Math.random() * 10000000000) + 1);
+            $scope.submissionID = Math.floor((Math.random() * 10000000000) + 1);
 
             ref.push({
                 'model': this.phoneModel,
@@ -234,7 +234,7 @@
                 'userMobile': this.userMobile,
                 'userEmail': this.userEmail,
                 'submissionDate': Firebase.ServerValue.TIMESTAMP,
-                'submissionID': submissionID
+                'submissionID': $scope.submissionID
             });
 
             $scope.offerAccepted = true;
