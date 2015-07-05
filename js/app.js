@@ -18,6 +18,7 @@
             }
         });
 
+        /*
         var notify = function () {
             // Check for notification compatibility.
             if (!'Notification' in window) {
@@ -65,6 +66,7 @@
             else
                 notify();
         } catch (err) {}
+        */
 
         var offersRef = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
         var offersSync = $firebaseArray(offersRef);
@@ -87,7 +89,7 @@
         this.selectedCondition = '';
 
         //Add a note that we do NOT accept jail-broken phones or those locked to any other network
-        this.networks = ['Mobinil', 'Vodafone', 'Etisalat', 'Factory Unlocked'];
+        this.networks = ['Mobinil', 'Vodafone', 'Etisalat', 'FAmory Unlocked'];
         this.conditions = ['Broken/\Cracked', 'Good', 'Flawless'];
 
         this.selectedPhone = 0;
@@ -219,6 +221,8 @@
 
         this.acceptOffer = function () {
             var ref = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
+            var $scope.submissionID = Math.floor((Math.random() * 10000000000) + 1);
+
             ref.push({
                 'model': this.phoneModel,
                 'storage': this.phoneStorage,
@@ -229,7 +233,8 @@
                 'userID': $scope.user.uid,
                 'userMobile': this.userMobile,
                 'userEmail': this.userEmail,
-                'submissionDate': Firebase.ServerValue.TIMESTAMP
+                'submissionDate': Firebase.ServerValue.TIMESTAMP,
+                'submissionID': submissionID
             });
 
             $scope.offerAccepted = true;
