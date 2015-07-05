@@ -1,14 +1,13 @@
 <div name="phoneList" ng-show="phone.selectedPhone==0 && phone.offerPrice == 0" style="padding:0px; margin:0px">
     <h4>Choose your iPhone model below<br/>
 </h4>
-    <div class="col-xs-6 col-md-3 text-center" ng-repeat="telephone in phone.phones | orderBy:'makeID' | limitTo:100" style="padding-bottom:10px">
-        <div class="img-thumbnail img-thumbnail-transparent" style="margin-bottom:5px; border: none">
-            <img ng-src="{{telephone.image}}" style="margin-bottom: 5px" />
+    <div class="col-xs-6 col-md-3 text-center" ng-repeat="telephone in phone.phones | orderBy:'makeID' | limitTo:100" style="padding-bottom:5px">
+        <div class="img-thumbnail img-thumbnail-transparent" style="margin-bottom:3px; border: none">
+            <img ng-src="{{telephone.image}}" style="margin-bottom: 3px; height: 125px" />
             <br/>
-            <button type="button" class="btn btn-primary" ng-click="phone.selectPhone(telephone.makeID, telephone.name)">
+            <button type="button" class="btn btn-default" ng-click="phone.selectPhone(telephone.makeID, telephone.name)">
                 Sell your <b>{{telephone.name}}</b>
             </button>
         </div>
-
     </div>
 </div>
