@@ -10,12 +10,12 @@
             </div>
         </div>
         <div class="text-center">
-            <b> 1. Storage</b> 
+            <b> 1. Storage</b>
             <br/>
             <div style="padding-bottom:10px">
                 <label class="btn btn-default" ng-repeat="storage in phone.getSelectedStorage()">
                     <input type="radio" name="phoneStorage" value="{{storage}}" ng-model="phone.phoneStorage" required>&nbsp;{{storage}}GB</label>
-            </div> <b> 2. Network</b> 
+            </div> <b> 2. Network</b>
             <br/>
             <div style="padding-bottom:10px">
                 <label class="btn btn-default" ng-repeat="network in phone.getNetworks()">
@@ -23,7 +23,7 @@
             </div>
             </label>
         </div>
-        <div class="text-center" style="padding-bottom:10px"> <b> 3. Condition</b> 
+        <div class="text-center" style="padding-bottom:10px"> <b> 3. Condition</b>
             <br/>
             <div style="padding-bottom:10px">
                 <label class="btn btn-default" ng-repeat="aCondition in phone.getConditions()">
@@ -43,7 +43,10 @@
 
                     <div name="good" ng-show="phone.phoneCondition=='Good'">
 
-                        Your iPhone is in great working order with some minor cosmetic signs of wear. Your iPhone has no cracks or missing buttons (power, home, ringer, and/or volume).
+                        Your iPhone is in great working order with:
+                            <li>some minor cosmetic signs of wear</li>
+                            <li>no cracks</li>
+                            <li>no missing buttons (power, home, ringer, and/or volume)</li>
 
                     </div>
                     <div name="broken" ng-show="phone.phoneCondition=='Broken/Cracked'">
