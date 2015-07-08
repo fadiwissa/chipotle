@@ -10,6 +10,9 @@
             <th data-field="condition">Condition</th>
             <th data-field="offer">Offer</th>
             <th data-field="date">Date</th>
+            <th data-field="date">Submission ID</th>
+            <th data-field="date">Mobile</th>
+            <th data-field="date">E-mail</th>
         </tr>
 
         <tr ng-repeat="acceptedOffer in acceptedOffers">
@@ -20,6 +23,9 @@
             <td>{{acceptedOffer.condition}}</td>
             <td>{{acceptedOffer.offer | number}}</td>
             <td>{{acceptedOffer.submissionDate | date : 'medium' : '+0200'}}&nbsp;(GMT+2)</td>
+            <td>{{acceptedOffer.submissionID }}</td>
+            <td>{{acceptedOffer.userMobile }}</td>
+            <td>{{acceptedOffer.userEmail }}</td>
         </tr>
     </table>
 </div>

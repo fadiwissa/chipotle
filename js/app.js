@@ -1,87 +1,17 @@
 (function () {
     var app = angular.module("phoneStore", ["firebase"]);
 
+    var iBsession = Math.floor(Math.random() * 10000000000) + 1;
+
     app.controller('phoneController', function ($scope, $firebaseArray, $firebaseObject) {
-        var myRef = new Firebase("https://shining-heat-2975.firebaseio.com");
-        var authClient = new FirebaseSimpleLogin(myRef, function (error, user) {
-            if (error) {
-                // an error occurred while attempting login
-                console.log(error);
-            } else if (user) {
-                // user authenticated with Firebase
-                $scope.user = user;
-                $scope.$apply();
-            } else {
-                // user is logged out
-                $scope.user = null;
-                $scope.$apply();
-            }
-        });
 
-        /*
-        var notify = function () {
-            // Check for notification compatibility.
-            if (!'Notification' in window) {
-                // If the browser version is unsupported, remain silent.
-                return;
-            }
-            // Log current permission level
-            console.log(Notification.permission);
-            // If the user has not been asked to grant or deny notifications
-            // from this domain...
-            if (Notification.permission === 'default') {
-                Notification.requestPermission(function () {
-                    // ...callback this function once a permission level has been set.
-                    notify();
-                });
-            }
-            // If the user has granted permission for this domain to send notifications...
-            else if (Notification.permission === 'granted') {
-                var n = new Notification(
-                    'New message from iBekya', {
-                        'body': 'iBekya: "Hey, thanks for enabling Notifications"',
-                        // ...prevent duplicate notifications
-                        'tag': 'unique string'
-                    }
-                );
-                // Remove the notification from Notification Center when clicked.
-                n.onclick = function () {
-                    this.close();
-                };
-                // Callback function when the notification is closed.
-                n.onclose = function () {
-                    console.log('Notification closed');
-                };
-            }
-            // If the user does not want notifications to come from this domain...
-            else if (Notification.permission === 'denied') {
-                // ...remain silent.
-                return;
-            }
-        };
+        var authClient = new Firebase("https://shining-heat-2975.firebaseio.com");
 
-        try {
-            if (!'Notification' in window)
-                return;
-            else
-                notify();
-        } catch (err) {}
-        */
+        var offerViewed = false;
 
         var offersRef = new Firebase("https://shining-heat-2975.firebaseio.com/acceptedOffers");
         var offersSync = $firebaseArray(offersRef);
         $scope.acceptedOffers = offersSync;
-
-        /*
-        var pricesRef = new Firebase("https://shining-heat-2975.firebaseio.com/phonePrices");
-        pricesRef.child('iPhone 4').set(iPhone4PricesArray);
-        pricesRef.child('iPhone 4S').set(iPhone4SPricesArray);
-        pricesRef.child('iPhone 5').set(iPhone5PricesArray);
-        pricesRef.child('iPhone 5S').set(iPhone5SPricesArray);
-        pricesRef.child('iPhone 5C').set(iPhone5CPricesArray);
-        pricesRef.child('iPhone 6').set(iPhone6PricesArray);
-        pricesRef.child('iPhone 6 Plus').set(iPhone6PlusPricesArray);
-        */
 
         this.phones = makesArray;
 
@@ -89,7 +19,7 @@
         this.selectedCondition = '';
 
         //Add a note that we do NOT accept jail-broken phones or those locked to any other network
-        this.networks = ['Mobinil', 'Vodafone', 'Etisalat', 'FAmory Unlocked'];
+        this.networks = ['Mobinil', 'Vodafone', 'Etisalat', 'Factory Unlocked'];
         this.conditions = ['Broken/\Cracked', 'Good', 'Flawless'];
 
         this.selectedPhone = 0;
@@ -97,6 +27,19 @@
         this.offerPrice = 0;
 
         this.readyForOffer = false;
+
+        // Create a callback which logs the current auth state
+        this.authDataCallback = function (user) {
+            if (user) {
+                $scope.user = user;
+                if ($scope.phone.readyForOffer) $scope.phone.getPhoneOffer();
+            } else {
+                //Log out user
+                $scope.user = null;
+            }
+        };
+        // Register the callback to be fired every time auth state changes
+        authClient.onAuth(this.authDataCallback);
 
         this.selectPhone = function (selection, selectedModel) {
             //Dummy function for now
@@ -130,14 +73,10 @@
             return true;
         };
 
-        this.getPhoneOffer = function () {
-            this.readyForOffer = true;
-            this.getOfferPrice();
-        };
-
         this.backToSpecs = function () {
             this.offerPrice = 0;
             this.readyForOffer = false;
+            this.offerViewed = false;
             $scope.offerAccepted = false;
         }
 
@@ -154,14 +93,31 @@
             this.userEmail = null;
             this.userMobileConfirmation = null;
             this.userEmailConfirmation = null;
+            this.offerViewed = false;
         };
 
         this.isSelected = function (checkPhone) {
             return checkPhone == this.phone;
         };
 
-        this.getOfferPrice = function () {
+        //This is triggered when the user has completed the phone specs form
+        this.setReadyForOffer = function () {
+            this.readyForOffer = true;
+            this.getPhoneOffer();
+        };
+
+        this.getPhoneOffer = function () {
             if (!this.readyForOffer) return;
+
+            if (!$scope.user) {
+                this.pushToBullet("A non-logged-in user (" + iBsession + ") just tried to receive an offer");
+                return;
+            }
+
+            if (this.offerViewed) {
+                //console.log("you have already viewed my offer");
+                return;
+            }
 
             var url = this.getSelectedName();
             url += "/" + this.phoneStorage;
@@ -180,6 +136,17 @@
 
             var offerRef = new Firebase(url);
             $scope.offeredPrice = $firebaseObject(offerRef);
+
+            offerRef.on("value", function (snapshot) {
+                $scope.phone.pushToBullet("We have just made an offer to a user (" + $scope.phone.iBsession + "): " + $scope.user.facebook.displayName + " [" + $scope.phone.phoneModel + " / " + $scope.phone.phoneStorage + " GB / " + $scope.phone.phoneNetwork + " / " + $scope.phone.phoneCondition + "] for EGP " + snapshot.val());
+
+            }, function (errorObject) {
+                //console.log("The read failed: " + errorObject.code);
+            });
+
+            this.offerViewed = true;
+
+            //console.log("just made an offer");
         };
 
         this.getSelectedName = function () {
@@ -212,11 +179,28 @@
         };
 
         this.signIn = function () {
-            authClient.login("facebook");
+            authClient.authWithOAuthPopup("facebook", function (error, user) {
+                if (error) {
+                    //console.log("Login Failed!", error);
+                } else {
+                    $scope.user = user;
+                    $scope.$apply();
+                    //console.log("Authenticated successfully with payload:", user);
+                }
+            });
         };
 
         this.signOut = function () {
-            authClient.logout();
+            authClient.unauth();
+        };
+
+        this.pushToBullet = function (message) {
+            PushBullet.APIKey = "GFjWaErhb8Xu7u5QgK5Kpdy4QJrhW1l5";
+            var res = PushBullet.push("note", null, "fadiwissa@gmail.com", {
+                title: "iBekya",
+                body: message
+            });
+            return;
         };
 
         this.acceptOffer = function () {
@@ -229,7 +213,7 @@
                 'network': this.phoneNetwork,
                 'condition': this.phoneCondition,
                 'offer': $scope.offeredPrice.$value,
-                'user': $scope.user.displayName,
+                'user': $scope.user.facebook.displayName,
                 'userID': $scope.user.uid,
                 'userMobile': this.userMobile,
                 'userEmail': this.userEmail,
@@ -238,6 +222,7 @@
             });
 
             $scope.offerAccepted = true;
+            this.pushToBullet("A user (" + iBsession + ") has just accepted our offer");
         };
     });
 

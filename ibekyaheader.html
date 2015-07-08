@@ -14,7 +14,7 @@
 </form>
 
 <div class="col-md-6 col-xs-12 text-right" ng-show="user">
-    <span style="padding-right: 5px">Welcome, {{user.displayName}}</span>
-    <img style="height: 70px; padding:10px" src="{{user.thirdPartyUserData.picture.data.url}}" alt="Facebook Profile Pic">
+    <span style="padding-right: 5px">Welcome, {{user.facebook.displayName}}</span>
+    <img style="height: 70px; padding:10px" src="{{user.facebook.profileImageURL}}" alt="Facebook Profile Pic">
     <button type="submit" class="btn btn-primary" ng-click="phone.signOut()">LOG OUT</button>
 </div>
