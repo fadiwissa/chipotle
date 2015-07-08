@@ -138,7 +138,7 @@
             $scope.offeredPrice = $firebaseObject(offerRef);
 
             offerRef.on("value", function (snapshot) {
-                $scope.phone.pushToBullet("We have just made an offer to a user (" + $scope.phone.iBsession + "): " + $scope.user.facebook.displayName + " [" + $scope.phone.phoneModel + " / " + $scope.phone.phoneStorage + " GB / " + $scope.phone.phoneNetwork + " / " + $scope.phone.phoneCondition + "] for EGP " + snapshot.val());
+                $scope.phone.pushToBullet("We have just made an offer to a user (" + iBsession + "): " + $scope.user.facebook.displayName + " [" + $scope.phone.phoneModel + " / " + $scope.phone.phoneStorage + " GB / " + $scope.phone.phoneNetwork + " / " + $scope.phone.phoneCondition + "] for EGP " + snapshot.val());
 
             }, function (errorObject) {
                 //console.log("The read failed: " + errorObject.code);
