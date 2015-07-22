@@ -1,0 +1,63 @@
+<div name="phoneSpecs" ng-show="phone.selectedPhone > 0 && !phone.readyForOffer" style="margin-top:10px">
+    <div layout="row" layout-align="space-around center" flex="100" style="margin-top: 10px">
+        <h4 style="padding-bottom: 0px; margin-bottom: 0px">Please specify your phone details below</h4>
+    </div>
+    <form name="phoneSpecsForms" layout="row" layout-wrap>
+        <div layout="column" layout-align="center center" flex="100" flex-gt-md="25">
+            <h4><b>{{phone.getSelectedName()}}</b></h4>
+            <div class="img-thumbnail" style="margin-bottom:5px; border: none">
+                <img ng-src="{{phone.getSelectedImage()}}" />
+            </div>
+        </div>
+        <div layout="column" layout-align="center start" flex="100" flex-gt-md="75">
+            <b> 1. Storage</b>
+            <div style="padding-bottom:10px">
+                <label class="btn btn-default" ng-repeat="storage in phone.getSelectedStorage()">
+                    <input type="radio" name="phoneStorage" value="{{storage}}" ng-model="phone.phoneStorage" required>&nbsp;{{storage}}GB</label>
+            </div> <b> 2. Network</b>
+            <div style="padding-bottom:10px">
+                <label class="btn btn-default" ng-repeat="network in phone.getNetworks()">
+                    <input type="radio" name="phoneNetwork" value="{{network}}" ng-model="phone.phoneNetwork" required>&nbsp;{{network}}
+                </label>
+            </div>
+
+            <b> 3. Body Condition</b>
+            <div style="padding-bottom:10px">
+                Scratches &nbsp;
+                <label class="btn btn-default">
+                    <input type="radio" name="bodyScratches" value="many" ng-model="phone.bodyScratches" required>&nbsp;Many
+                </label>
+
+                <label class="btn btn-default">
+                    <input type="radio" name="bodyScratches" value="few" ng-model="phone.bodyScratches" required>&nbsp;Few
+                </label>
+
+                <label class="btn btn-default">
+                    <input type="radio" name="bodyScratches" value="none" ng-model="phone.bodyScratches" required>&nbsp;None
+                </label>
+            </div>
+
+            <div style="padding-bottom:10px">
+                Dents &nbsp;
+                <label class="btn btn-default">
+                    <input type="radio" name="bodyDents" value="many" ng-model="phone.bodyDents" required>&nbsp;Many
+                </label>
+
+                <label class="btn btn-default">
+                    <input type="radio" name="bodyDents" value="few" ng-model="phone.bodyDents" required>&nbsp;Few
+                </label>
+
+                <label class="btn btn-default">
+                    <input type="radio" name="bodyDents" value="none" ng-model="phone.bodyDents" required>&nbsp;None
+                </label>
+            </div>
+
+        </div>
+        <div layout="row" layout-align="center center" flex="100" style="margin-top: 10px">
+            <button type="button" class="btn btn-primary" ng-click="phone.restartSelection()" style="width: 120px">&lt; &nbsp;Back</button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-primary" style="width: 120px" ng-disabled="phoneSpecsForms.$invalid" ng-click="phone.setReadyForOffer()">Get Offer &nbsp; &gt;</button>
+
+        </div>
+    </form>
+</div>
