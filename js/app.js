@@ -240,6 +240,13 @@
         };
     });
 
+    app.directive('facebookLike', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'facebook-like.html'
+        };
+    });
+
     app.directive('phoneOffer', function () {
         return {
             restrict: 'E',
