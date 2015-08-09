@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module("phoneStore", ["firebase"]);
+    var app = angular.module("phoneStore", ["firebase", "ngMaterial"]);
 
     var iBsession = Math.floor(Math.random() * 10000000000) + 1;
 
@@ -163,7 +163,7 @@
                 return makesArray[this.selectedPhone - 1].image;
         };
 
-        this.getSelectedStorage = function () {
+        this.getStorageOptionsForSelectedModel = function () {
             if (this.selectedPhone == 0)
                 return '';
             else
@@ -269,37 +269,37 @@
 
     var makesArray = [{
         name: 'iPhone 4',
-        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-4.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-4.png',
         makeID: 1,
         storage: [16, 32]
     }, {
         name: 'iPhone 4S',
-        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-4s.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-4s.png',
         makeID: 2,
         storage: [16, 32, 64]
     }, {
         name: 'iPhone 5',
-        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5.png',
         makeID: 3,
         storage: [16, 32, 64]
     }, {
         name: 'iPhone 5C',
-        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5c.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5c.png',
         makeID: 4,
         storage: [16, 32]
     }, {
         name: 'iPhone 5S',
-        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5s.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-5s.png',
         makeID: 5,
         storage: [16, 32, 64]
     }, {
         name: 'iPhone 6',
-        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-6.jpg',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-6.png',
         makeID: 6,
         storage: [16, 64, 128]
     }, {
         name: 'iPhone 6 Plus',
-        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-6-plus.jpg ',
+        image: 'https://ibekya-assets.firebaseapp.com/img/iphone-6-plus.png ',
         makeID: 7,
         storage: [16, 64, 128]
     }];

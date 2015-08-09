@@ -54,17 +54,6 @@ body {
         padding-right: 20px;
     }
 }
-
-/*.wrapper {
-    background: url('../img/bg-blue.png') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+md-select {
+    padding: 5px;
 }
-.panel-transparent .panel-body {
-    background: rgba(46, 51, 56, 0.3)!important;
-}
-.img-thumbnail-transparent {
-    background: rgba(46, 51, 56, 0.0)!important;
-}*/

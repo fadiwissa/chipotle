@@ -1,7 +1,7 @@
 <div layout="column" layout-gt-md="row" id="header" layout-wrap>
     <div flex-gt-md="20" layout="row" layout-align-gt-md="start center" layout-align="center center">
         <a href="index.html">
-            <img style="height: 70px; padding:10px" src="https://ibekya-assets.firebaseapp.com/img/iBekya.png" alt="iBekya Logo">
+            <img style="height: 60px; padding:10px" src="https://ibekya-assets.firebaseapp.com/img/iBekya.png" alt="iBekya Logo">
         </a>
     </div>
     <div flex-gt-md="15" style="padding-top:23px" hide show-gt-md>
@@ -13,7 +13,7 @@
     <form flex-gt-md="15" style="padding-top:20px; padding-bottom:15px" role="form" ng-show="!user" layout="row" layout-align="center end">
         <button type="submit" class="btn btn-default" ng-click="phone.signIn()">Login</button>
     </form>
-    <div flex-gt-md="20" flex="100" ng-show="user">
+    <div flex-gt-md="20" ng-show="user">
         <span style="padding-right: 5px">Welcome, {{user.facebook.displayName}}</span>
         <img style="height: 70px; padding:10px" src="{{user.facebook.profileImageURL}}" alt="Facebook Profile Pic">
         <button type="submit" class="btn btn-primary" ng-click="phone.signOut()">Log Out</button>

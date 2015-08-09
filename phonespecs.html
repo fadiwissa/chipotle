@@ -1,57 +1,75 @@
-<div name="phoneSpecs" ng-show="phone.selectedPhone > 0 && !phone.readyForOffer" style="margin-top:10px">
-    <div layout="row" layout-align="space-around center" flex="100" style="margin-top: 10px">
+<div name="phoneSpecs" ng-show="phone.selectedPhone > 0 && !phone.readyForOffer">
+    <div layout="row" layout-align="space-around center" flex="100">
         <h4 style="padding-bottom: 0px; margin-bottom: 0px">Please specify your phone details below</h4>
     </div>
     <form name="phoneSpecsForms" layout="row" layout-wrap>
         <div layout="column" layout-align="center center" flex="100" flex-gt-md="25">
             <h4><b>{{phone.getSelectedName()}}</b></h4>
-            <div class="img-thumbnail" style="margin-bottom:5px; border: none">
+            <div>
                 <img ng-src="{{phone.getSelectedImage()}}" />
             </div>
         </div>
         <div layout="column" layout-align="center start" flex="100" flex-gt-md="75">
-            <b> 1. Storage</b>
-            <div style="padding-bottom:10px">
-                <label class="btn btn-default" ng-repeat="storage in phone.getSelectedStorage()">
-                    <input type="radio" name="phoneStorage" value="{{storage}}" ng-model="phone.phoneStorage" required>&nbsp;{{storage}}GB</label>
-            </div> <b> 2. Network</b>
-            <div style="padding-bottom:10px">
-                <label class="btn btn-default" ng-repeat="network in phone.getNetworks()">
-                    <input type="radio" name="phoneNetwork" value="{{network}}" ng-model="phone.phoneNetwork" required>&nbsp;{{network}}
-                </label>
-            </div>
-
-            <b> 3. Body Condition</b>
-            <div style="padding-bottom:10px">
-                Scratches &nbsp;
-                <label class="btn btn-default">
-                    <input type="radio" name="bodyScratches" value="many" ng-model="phone.bodyScratches" required>&nbsp;Many
-                </label>
-
-                <label class="btn btn-default">
-                    <input type="radio" name="bodyScratches" value="few" ng-model="phone.bodyScratches" required>&nbsp;Few
-                </label>
-
-                <label class="btn btn-default">
-                    <input type="radio" name="bodyScratches" value="none" ng-model="phone.bodyScratches" required>&nbsp;None
-                </label>
-            </div>
-
-            <div style="padding-bottom:10px">
-                Dents &nbsp;
-                <label class="btn btn-default">
-                    <input type="radio" name="bodyDents" value="many" ng-model="phone.bodyDents" required>&nbsp;Many
-                </label>
-
-                <label class="btn btn-default">
-                    <input type="radio" name="bodyDents" value="few" ng-model="phone.bodyDents" required>&nbsp;Few
-                </label>
-
-                <label class="btn btn-default">
-                    <input type="radio" name="bodyDents" value="none" ng-model="phone.bodyDents" required>&nbsp;None
-                </label>
-            </div>
-
+            <md-select placeholder="Phone Storage" ng-model="phone.phoneStorage">
+                <md-option ng-repeat="storage in phone.getStorageOptionsForSelectedModel()" value="{{storage}}">{{storage}} GB</md-option>
+            </md-select>
+            <md-select placeholder="Phone Network" ng-model="phone.phoneNetwork">
+                <md-option ng-repeat="network in phone.getNetworks()" value="{{network}}">{{network}}</md-option>
+            </md-select>
+            <md-select placeholder="Have you replaced any of your iPhone's parts?" ng-model="phone.replacedParts">
+                <md-option value="back or screen">I replaced the iPhone's back or screen</md-option>
+                <md-option value="other">I replaced something else</md-option>
+                <md-option value="none">Nothing was replaced</md-option>
+            </md-select>
+            <md-select placeholder="Body Condition" ng-model="phone.bodyCondition">
+                <md-option value="perfect">Body is in Perfect Condition (No Scratches & No Dents)</md-option>
+                <md-option value="imperfect">Body has Scratches or Dents</md-option>
+            </md-select>
+            <md-select placeholder="Body Scratches" ng-model="phone.bodyScratches" ng-show="phone.bodyCondition == 'imperfect'">
+                <md-option value="many">Body has many scratches</md-option>
+                <md-option value="some">Body has some scratches</md-option>
+                <md-option value="none">Body has no scratches</md-option>
+            </md-select>
+            <md-select placeholder="Body Dents" ng-model="phone.bodyDents" ng-show="phone.bodyCondition == 'imperfect'">
+                <md-option value="many">Body has many dents</md-option>
+                <md-option value="some">Body has some dents</md-option>
+                <md-option value="none">Body has no Dents</md-option>
+            </md-select>
+            <md-select placeholder="Screen Condition" ng-model="phone.screenCondition">
+                <md-option value="broken/cracked">Screen is broken and/or cracked</md-option>
+                <md-option value="many scratches">Screen has many scratches</md-option>
+                <md-option value="some scratches">Screen has some scratches</md-option>
+                <md-option value="perfect">Screen is in perfect condition</md-option>
+            </md-select>
+            <md-select placeholder="Are all of your iPhone's buttons perfectly functional?" ng-model="phone.buttonsCondition">
+                <md-option value="power">No, the power button is not working well</md-option>
+                <md-option value="volume">No, the volume button is not working well</md-option>
+                <md-option value="mute/rotate">No, the mute/screen rotation button is not working well</md-option>
+                <md-option value="home">No, the home button is not working well</md-option>
+                <md-option value="perfect">Yes, all buttons are perfectly functional</md-option>
+            </md-select>
+            <md-select placeholder="Are all of your iPhone's sound functions perfectly functioinal?" ng-model="phone.soundCondition">
+                <md-option value="mic">No, I have microphone problems</md-option>
+                <md-option value="audio jack">No, I have audio jack problems</md-option>
+                <md-option value="ear speaker">No, I have ear speaker problems</md-option>
+                <md-option value="loud speaker">No, I have loud speaker problems</md-option>
+                <md-option value="earphones">No, I have earphone problems</md-option>
+                <md-option value="perfet">Yes, all sound functions are perfectly functional</md-option>
+            </md-select>
+            <md-select placeholder="Are all of your connectivity's functions perfectly functioinal?" ng-model="phone.connectivityCondition">
+                <md-option value="wifi">No, I have Wi-Fi connectivity problems</md-option>
+                <md-option value="bluetooth">No, I have Bluetooth connectivity problems</md-option>
+                <md-option value="cellular">No, I have Cellular/3G connectivity problems</md-option>
+                <md-option value="perfect">Yes, all connectivity funtions are perfectly functional</md-option>
+            </md-select>
+            <md-select placeholder="Is your battery original and in good condition?" ng-model="phone.batteryCondition">
+                <md-option value="replaced">No, my battery has been replaced</md-option>
+                <md-option value="problem">No, I have battery problems</md-option>
+                <md-option value="dock">No, I have charging dock problems</md-option>
+                <md-option value="charging cable">No, I have charging cable problems</md-option>
+                <md-option value="wall charger">No, I have wall charger problems</md-option>
+                <md-option value="perfect">Yes, my battery is in good condition</md-option>
+            </md-select>
         </div>
         <div layout="row" layout-align="center center" flex="100" style="margin-top: 10px">
             <button type="button" class="btn btn-primary" ng-click="phone.restartSelection()" style="width: 120px">&lt; &nbsp;Back</button>
