@@ -58,7 +58,7 @@ md-select {
     padding: 5px;
 }
 md-checkbox {
-    min-width: 140px;
+    min-width: 100px;
 }
 .sectionSpan {
     font-weight: 800;
