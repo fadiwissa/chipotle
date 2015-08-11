@@ -7,13 +7,15 @@
     <div flex-gt-md="15" style="padding-top:23px" hide show-gt-md>
         <img style="height: 25px; margin-right: 5px" src="https://ibekya-assets.firebaseapp.com/img/egypt.png" alt="Egypt"><small>Exclusively in Egypt</small>
     </div>
-    <div flex-gt-md="50" style="padding-top:23px" hide show-gt-md>
+    <div flex-gt-md="35" style="padding-top:23px" hide show-gt-md>
         <img style="height: 25px; margin-right: 5px" src="https://ibekya-assets.firebaseapp.com/img/pickup.png" alt="Cash on Delivery"><small>Cash on Pick-Up</small>
     </div>
+    <div flex-gt-md="15" ng-show="!user"></div>
+
     <form flex-gt-md="15" style="padding-top:20px; padding-bottom:15px" role="form" ng-show="!user" layout="row" layout-align="center end">
         <button type="submit" class="btn btn-default" ng-click="phone.signIn()">Login</button>
     </form>
-    <div flex-gt-md="20" ng-show="user">
+    <div flex-gt-md="30" ng-show="user">
         <span style="padding-right: 5px">Welcome, {{user.facebook.displayName}}</span>
         <img style="height: 70px; padding:10px" src="{{user.facebook.profileImageURL}}" alt="Facebook Profile Pic">
         <button type="submit" class="btn btn-primary" ng-click="phone.signOut()">Log Out</button>

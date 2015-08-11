@@ -1,19 +1,19 @@
 <div name="phoneSpecs" ng-show="phone.selectedPhone > 0 && !phone.readyForOffer">
-    <div layout="column" layout-align="space-around center" style="padding-bottom: 20px" flex="100">
+    <div layout="column" layout-align="space-around center" style="padding-bottom: 5px" flex="100">
         <h4 style="padding-bottom: 0px; margin-bottom: 10px">Please specify your <b>{{phone.getSelectedName()}}</b> details below</h4>
         <div>
             <img ng-src="{{phone.getSelectedImage()}}" />
         </div>
     </div>
 
-    <div layout="column" layout-align="space-around center" style="padding-bottom: 20px" flex="100">
+    <div layout="column" layout-align="space-around center" style="padding-bottom: 5px" flex="100">
         <form name="phoneSpecsForms">
             <div layout="column" flex="100" layout-align="center start">
                 <span class="sectionSpan">Phone Specs</span>
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Storage</span>
                     <div ng-repeat="storage in phone.getStorageOptionsForSelectedModel()">
-                        <md-checkbox ng-checked="cb_isSelected(storage, cb_Storage)" ng-click="cb_toggleSingleSelection(storage, cb_Storage)">{{storage}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(storage, cb_Storage)" ng-click="cb_toggleSingleSelection(storage, cb_Storage)">{{storage}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Network</span>
                     <div ng-repeat="network in phone.networks">
-                        <md-checkbox ng-checked="cb_isSelected(network, cb_Network)" ng-click="cb_toggleSingleSelection(network, cb_Network)">{{network}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(network, cb_Network)" ng-click="cb_toggleSingleSelection(network, cb_Network)">{{network}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Scratches</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BodyScratches)" ng-click="cb_toggleSingleSelection(option, cb_BodyScratches)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BodyScratches)" ng-click="cb_toggleSingleSelection(option, cb_BodyScratches)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Dents</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BodyDents)" ng-click="cb_toggleSingleSelection(option, cb_BodyDents)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BodyDents)" ng-click="cb_toggleSingleSelection(option, cb_BodyDents)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Cracks</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BodyCracks)" ng-click="cb_toggleSingleSelection(option, cb_BodyCracks)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BodyCracks)" ng-click="cb_toggleSingleSelection(option, cb_BodyCracks)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Scratches</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_ScreenScratches)" ng-click="cb_toggleSingleSelection(option, cb_ScreenScratches)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_ScreenScratches)" ng-click="cb_toggleSingleSelection(option, cb_ScreenScratches)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Cracks</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_ScreenCracks)" ng-click="cb_toggleSingleSelection(option, cb_ScreenCracks)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_ScreenCracks)" ng-click="cb_toggleSingleSelection(option, cb_ScreenCracks)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Colored Spots</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_ScreenColoredSpots)" ng-click="cb_toggleSingleSelection(option, cb_ScreenColoredSpots)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_ScreenColoredSpots)" ng-click="cb_toggleSingleSelection(option, cb_ScreenColoredSpots)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Replaced</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_ScreenReplaced)" ng-click="cb_toggleSingleSelection(option, cb_ScreenReplaced)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_ScreenReplaced)" ng-click="cb_toggleSingleSelection(option, cb_ScreenReplaced)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Front Camera</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_CamFrontProblem)" ng-click="cb_toggleSingleSelection(option, cb_CamFrontProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_CamFrontProblem)" ng-click="cb_toggleSingleSelection(option, cb_CamFrontProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Back Camera</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_CamBackProblem)" ng-click="cb_toggleSingleSelection(option, cb_CamBackProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_CamBackProblem)" ng-click="cb_toggleSingleSelection(option, cb_CamBackProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Flash</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_CamFlashProblem)" ng-click="cb_toggleSingleSelection(option, cb_CamFlashProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_CamFlashProblem)" ng-click="cb_toggleSingleSelection(option, cb_CamFlashProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Power Button</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BtnPwrProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnPwrProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BtnPwrProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnPwrProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Volume Button(s)</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BtnVlmProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnVlmProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BtnVlmProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnVlmProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Mute Button</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BtnMutProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnMutProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BtnMutProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnMutProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Home Button</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BtnHomProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnHomProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BtnHomProblem)" ng-click="cb_toggleSingleSelection(option, cb_BtnHomProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Microphone</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SndMicProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndMicProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SndMicProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndMicProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Audio Jack</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SndJckProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndJckProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SndJckProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndJckProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -169,7 +169,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Ear Speaker</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SndSpkrProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndSpkrProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SndSpkrProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndSpkrProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Loud Speaker</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SndLdSpkrProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndLdSpkrProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SndLdSpkrProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndLdSpkrProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Earphones</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SndEarPhnProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndEarPhnProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SndEarPhnProblem)" ng-click="cb_toggleSingleSelection(option, cb_SndEarPhnProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Signal/Calls</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SysCellProblem)" ng-click="cb_toggleSingleSelection(option, cb_SysCellProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SysCellProblem)" ng-click="cb_toggleSingleSelection(option, cb_SysCellProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Wi-Fi</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SysWiFiProblem)" ng-click="cb_toggleSingleSelection(option, cb_SysWiFiProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SysWiFiProblem)" ng-click="cb_toggleSingleSelection(option, cb_SysWiFiProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Bluetooth</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_SysBTProblem)" ng-click="cb_toggleSingleSelection(option, cb_SysBTProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_SysBTProblem)" ng-click="cb_toggleSingleSelection(option, cb_SysBTProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Battery</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BatProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BatProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Battery Replaced</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BatReplaced)" ng-click="cb_toggleSingleSelection(option, cb_BatReplaced)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BatReplaced)" ng-click="cb_toggleSingleSelection(option, cb_BatReplaced)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Charging Dock</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BatDockProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatDockProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BatDockProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatDockProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -246,7 +246,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Charging Cable</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BatCblProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatCblProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BatCblProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatCblProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -254,7 +254,7 @@
                 <div layout="row" layout-align="start center">
                     <span class="titleSpan">Problem with Wall Charger</span>
                     <div ng-repeat="option in phone.typicalOptions">
-                        <md-checkbox ng-checked="cb_isSelected(option, cb_BatChrgrProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatChrgrProblem)">{{option}}
+                        <md-checkbox class="md-primary" ng-checked="cb_isSelected(option, cb_BatChrgrProblem)" ng-click="cb_toggleSingleSelection(option, cb_BatChrgrProblem)">{{option}}
                         </md-checkbox>
                     </div>
                 </div>
@@ -267,5 +267,4 @@
             </div>
         </form>
     </div>
-    <br/>
 </div>
