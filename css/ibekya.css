@@ -57,3 +57,16 @@ body {
 md-select {
     padding: 5px;
 }
+md-checkbox {
+    min-width: 140px;
+}
+.sectionSpan {
+    font-weight: 800;
+    background-color: #E0E0E0;
+    width: 100%;
+    padding: 4px;
+}
+.titleSpan {
+    min-width: 210px;
+    text-indent: 10px;
+}
